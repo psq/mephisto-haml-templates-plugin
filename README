@@ -1,0 +1,6 @@
+= Haml template renderer for Mephisto
+
+use ".haml" for layout and template files.
+
+= Installation
+script/plugin install -x http://svn.nanorails.com/plugins/mephisto_haml_templates/
