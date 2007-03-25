@@ -1,6 +1,14 @@
 require 'haml_template'
 require 'dispatcher'
 
+unless BaseDrop.method_defined?(:method_missing)
+  BaseDrop.class_eval do
+    define_method("method_missing") { |name|
+      self[name]
+    }
+  end
+end
+
 def after_method(klass, target, feature, &block)
   # Strip out punctuation on predicates or bang methods since
   # e.g. target?_without_feature is not a valid method name.

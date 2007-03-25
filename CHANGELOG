@@ -1,0 +1,11 @@
+* 3/24/2007 *
+
+* added method_missing to allow for article.body instead of article['body'] as suggested by Mislav
+
+* added extra hash to include method.  For example:
+
+- for article in section_articles
+  .post
+    = include "_article", { :article => article }
+
+will include the "_article" template with the added article variable with the value article as defined in the current context.  Unlike its liquid equivalent, you can use add any number of values.  Current values with the same name will be temporarily unavailable in the included template.

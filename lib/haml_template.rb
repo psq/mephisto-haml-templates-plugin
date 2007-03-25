@@ -63,13 +63,13 @@ class HamlTemplate < BaseDrop
 # <% main_content %>
 #
   def main_content
-    do_include(@template)
+    do_include(@template, context={})
   end
 
 # include template
 # <% include "template name" %>
-  def include(template)
-    do_include(@site_source.find_preferred_template(:page, template+".haml"))
+  def include(template, context={})
+    do_include(@site_source.find_preferred_template(:page, template+".haml"), context)
   end
 
   def random_articles(section, limit = nil)
@@ -77,13 +77,13 @@ class HamlTemplate < BaseDrop
   end
 
 protected
-  def do_include(template)
+  def do_include(template, context={})
     # need to save/restore @output since everything is using the same binding.
     # psq-TODO: if page caching is not working well enough, keeping a compiled version of the template could help
     # see ActionView::CompiledTemplates
     begin
       options = {}
-      options[:locals] = @locals
+      options[:locals] = @locals.merge(context)
       options[:filename] ||= template
       if @precompiled = get_precompiled(template)
         options[:precompiled] ||= @precompiled
