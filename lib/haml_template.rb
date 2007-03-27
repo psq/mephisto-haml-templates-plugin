@@ -38,7 +38,7 @@ class HamlTemplate < BaseDrop
     @submitted = @context['submitted'] || {}
     @submitted.each{ |k, v| @submitted[k] = CGI::escapeHTML(v) }
 
-    @site = @site_source.to_liquid
+    @site = @site_source.to_liquid(section)
     @site.context = @context
     if (section)
       @section = section.to_liquid

@@ -1,3 +1,7 @@
+* 3/26/2007 *
+
+* Fix for section.current
+
 * 3/24/2007 *
 
 * added method_missing to allow for article.body instead of article['body'] as suggested by Mislav
