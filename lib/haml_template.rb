@@ -34,9 +34,11 @@ class HamlTemplate < BaseDrop
     @article = assigns['article']
     @article.context = @context if @article
     
-    # psq-TODO can't see how this has a value
+    # form handling
     @submitted = @context['submitted'] || {}
     @submitted.each{ |k, v| @submitted[k] = CGI::escapeHTML(v) }
+    @errors = @context['errors']
+    @message = @context['message']
 
     @site = @site_source.to_liquid(section)
     @site.context = @context
