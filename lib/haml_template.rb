@@ -85,16 +85,17 @@ protected
     # see ActionView::CompiledTemplates
     begin
       options = {}
-      options[:locals] = @locals.merge(context)
+      # options[:locals] = @locals.merge(context)
       options[:filename] ||= template
-      if @precompiled = get_precompiled(template)
-        options[:precompiled] ||= @precompiled
-        engine = Haml::Engine.new("", options)
-      else
+      # Precompiling is automatic in this version of Haml
+      # if @precompiled = get_precompiled(template)
+      #   options[:precompiled] ||= @precompiled
+      #   engine = Haml::Engine.new("", options)
+      # else
         engine = Haml::Engine.new(File.read(template), options)
-        set_precompiled(template, engine.precompiled)
-      end
-      engine.to_html(self)
+      #   set_precompiled(template, engine.precompiled)
+      # end
+      engine.to_html(self, @locals.merge(context))
     rescue
       raise "HAML Error: #{$!}"
     end
